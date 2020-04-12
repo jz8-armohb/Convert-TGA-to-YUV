@@ -12,4 +12,4 @@ Add support for Image Type code 2 (uncompressed, unmapped RGB) & 10 (run length 
 
 2020.4.12 14:54
 
-Improvements of output info.
+Improvements made for developed function check.
