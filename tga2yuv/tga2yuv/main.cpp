@@ -71,6 +71,12 @@ int main(int argc, char* argv[])
     case 10:
         cout << "Image type 10: run length encoded, unmapped RGB image.\n";
         break;
+    case 3:
+        cout << "Image type 3: uncompressed greysacle image.\n";
+        break;
+    case 11:
+        cout << "Image type 11: run length encoded, greyscale image.\n";
+        break;
     default:
         cout << "Cannot handle Image type " << hd.imageTypeCode << " currently. Function being developed.\n";
         exit(-1);
