@@ -63,16 +63,26 @@ int main(int argc, char* argv[])
     memset(rgbBuffer, 0, hd.height * hd.width * 3);   // Initialisation
 
     /* Developed function check & invalidation check */
-    if (hd.imageTypeCode != 2 && hd.imageTypeCode != 10)
+    switch (hd.imageTypeCode)
     {
-        cout << "Can only handle image type 2 (uncompressed, unmapped RGB) & image type 10 (run length encoded, unmapped RGB).\nOther options being developed.\n";
+    case 2:
+        cout << "Image type 2: uncompressed, unmapped RGB image.\n";
+        break;
+    case 10:
+        cout << "Image type 10: run length encoded, unmapped RGB image.\n";
+        break;
+    default:
+        cout << "Cannot handle Image type " << hd.imageTypeCode << " currently. Function being developed.\n";
         exit(-1);
+        break;
     }
+
     if (hd.bitsPerPixel != 16 && hd.bitsPerPixel != 24 && hd.bitsPerPixel != 32)
     {
         cout << "Invalid value of image pixel size!\nCan only handle pixel depths of 16, 24, and 32.\n";
         exit(-1);
     }
+
     if (hd.colourMapType != 0 && hd.colourMapType != 1)
     {
         cout << "Invalid value of colour map type!\nCan only handle colour map types of 0 and 1.\n";
@@ -81,7 +91,7 @@ int main(int argc, char* argv[])
 
     /* Skip over unnecessary chunks */
     offset += hd.idLength;
-    offset += hd.colourMapType * hd.colourMapLength * hd.colourMapDepth;  // ????应该还要乘hd.colourMapDepth吧？
+    offset += hd.colourMapType * hd.colourMapLength * hd.colourMapDepth;
     cout << offset << " byte(s) skipped over.\n\n";
     fseek(tgaFilePtr, offset, SEEK_CUR);  // Skip 'offset' bytes from the end of header
 
